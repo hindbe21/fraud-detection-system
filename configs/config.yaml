@@ -1,0 +1,40 @@
+project:
+  name: fraud_detection_system
+  random_state: 42
+  test_size: 0.2
+  val_size: 0.1
+
+data:
+  raw_path: data/raw/creditcard.csv
+  processed_dir: data/processed
+
+features:
+  target: Class
+  time_column: Time
+  amount_column: Amount
+  selected_top_k: 20
+
+sampling:
+  use_smote: true
+  smote_sampling_strategy: 0.2
+
+training:
+  threshold_default: 0.3
+  models:
+    - logistic_regression
+    - random_forest
+    - xgboost
+    - lightgbm
+    - mlp
+
+evaluation:
+  optimize_for: recall_fraud
+  minimum_auc: 0.90
+  minimum_recall: 0.75
+  minimum_f1: 0.50
+
+gcp:
+  upload_to_gcs: false
+
+mlflow:
+  enabled: true
