@@ -3,7 +3,6 @@ __pycache__/
 .env
 .venv/
 venv/
-artifacts/
 mlruns/
 data/raw/
 data/processed/
