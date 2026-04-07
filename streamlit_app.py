@@ -5,7 +5,7 @@ import json
 from datetime import datetime
 from pathlib import Path
 
-API_URL = "http://localhost:8000/predict"
+API_URL = "https://fraud-detection-system-8p50.onrender.com/predict"
 LOG_FILE = Path("monitoring_log.json")
 
 # ─── Exemples de transactions ─────────────────────────────────────────────
@@ -93,7 +93,7 @@ with left:
 with right:
     st.subheader("API")
     st.code(API_URL, language="text")
-    st.caption("L'API FastAPI doit être lancée sur localhost:8000")
+    st.caption("L'API FastAPI est déployée sur Render")
 
 st.markdown("### Variables V1 à V28")
 feature_cols = st.columns(4)
@@ -130,7 +130,7 @@ if st.button("Lancer la prédiction", use_container_width=True):
             st.error(f"Erreur API : {response.status_code}")
             st.text(response.text)
     except requests.exceptions.ConnectionError:
-        st.error("Impossible de contacter l'API. Vérifie que FastAPI tourne sur http://localhost:8000")
+        st.error("Impossible de contacter l'API Render. Vérifie que le service API est bien en ligne.")
     except Exception as e:
         st.error(f"Erreur : {e}")
 
