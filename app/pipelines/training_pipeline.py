@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 import joblib
 import mlflow
-
+import os
 from app.core.config import load_config
 from app.core.logger import get_logger
 from app.data.load_data import load_dataset
@@ -63,7 +63,7 @@ def run_training_pipeline():
         X_train_final, y_train_final = X_train_selected, y_train
 
     mlflow.set_tracking_uri(
-        config["MLFLOW_TRACKING_URI"] if "MLFLOW_TRACKING_URI" in config else "http://127.0.0.1:5000"
+        os.environ.get("MLFLOW_TRACKING_URI", "http://127.0.0.1:5000")
     )
     mlflow.set_experiment(config["mlflow"].get("experiment_name", "fraud_detection_experiment"))
 
